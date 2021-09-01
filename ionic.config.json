@@ -1,0 +1,7 @@
+{
+  "name": "glimmer-teach",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

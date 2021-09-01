@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "glimmer-teach",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
