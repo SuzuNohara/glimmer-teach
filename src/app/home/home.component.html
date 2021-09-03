@@ -1,3 +1,36 @@
-<p>
-  home works!
-</p>
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-button (click)="logout()"><ion-icon name="log-out"></ion-icon></ion-button>
+      </ion-buttons>
+      <ion-title>Nombre Profesor</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-progress-bar *ngIf='loading' type="indeterminate"></ion-progress-bar>
+
+  <!-- <ion-list> -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>
+        <ion-icon name="link-outline"></ion-icon>&nbsp;&nbsp;
+        <ion-icon name="calendar-outline"></ion-icon>&nbsp;&nbsp;
+      </ion-card-subtitle>
+      <ion-card-title>Nombre salon</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-row>
+        <ion-badge color="primary">Periodo 2</ion-badge>&nbsp;&nbsp;
+        <ion-badge color="primary">Actividades 5</ion-badge>&nbsp;&nbsp;
+        <ion-badge color="primary">Alumnos 47</ion-badge>&nbsp;&nbsp;
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="createClassRoom()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

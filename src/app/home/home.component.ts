@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/firebase/auth.service';
+import { Router } from '@angular/router';
+import { BackendService } from '../services/backend.service';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,36 @@ import { AuthService } from '../services/firebase/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private auth: AuthService) { }
+  public loading: boolean;
+  public nombre: string;
+  public salones: any;
 
-  ngOnInit() {
-    this.auth.authState();
+  constructor(private route: Router, private backend: BackendService) {
+    this.loading = true;
   }
 
+  ngOnInit() {
+    this.backend.authState();
+    setTimeout(() => {
+      this.backend.getUserInfo().then((data) => {
+        console.log(data);
+        this.loading = false;
+      }).catch((error) => {
+        console.log(error);
+        this.loading = false;
+      });
+    }, 300);
+  }
+
+  public navigateClass(){
+    this.route.navigate(['classroom']);
+  }
+
+  public createClassRoom(){
+    this.route.navigate(['createclass']);
+  }
+
+  public logout(){
+    this.backend.logout();
+  }
 }

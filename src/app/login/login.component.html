@@ -1,10 +1,31 @@
 <ion-card class="middle">
   <ion-card-header>
-    <ion-card-title>Iniciar Sesion</ion-card-title>
+    <ion-card-title>
+      <center>
+        Iniciar Sesion
+      </center>
+    </ion-card-title>
   </ion-card-header>
 
   <ion-card-content>
-    Keep close to Nature's heart... and break clear away, once in awhile,
-    and climb a mountain or spend a week in the woods. Wash your spirit clean.
+    Inicia sesion para conectarte a los servicios de Glimmer
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" [(ngModel)]="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contrasena</ion-label>
+        <ion-input type="password" [(ngModel)]="contra"></ion-input>
+      </ion-item>
+      <br>
+      <ion-button (click)='login()' expand="full">Iniciar Sesion</ion-button>
+    </ion-list>
   </ion-card-content>
 </ion-card>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="register()">
+    <ion-icon name="person-add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

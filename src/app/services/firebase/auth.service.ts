@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, UserCredential } from "firebase/auth";
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 
@@ -9,17 +9,13 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  app = initializeApp(environment.firebase);
-  public auth = getAuth(this.app);
+  private app = initializeApp(environment.firebase);
+  private auth = getAuth(this.app);
 
   constructor(private route: Router) { }
 
-  public async createUser(email, password){
-    await createUserWithEmailAndPassword(this.auth, email, password).then((userCredential) => {
-      return true;
-    }).catch((error) => {
-      return false;
-    });
+  public createUser(name, email, password){
+    return createUserWithEmailAndPassword(this.auth, email, password);
   }
 
   public async authtentication(email, password){
@@ -31,7 +27,9 @@ export class AuthService {
   }
 
   public async authState(){
-    onAuthStateChanged(this.auth, (user) => {
+    let app = initializeApp(environment.firebase);
+    let auth = getAuth(app);
+    onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
         this.route.navigateByUrl('home');
@@ -41,4 +39,15 @@ export class AuthService {
     });
   }
 
+  public logout(){
+    signOut(this.auth);
+  }
+
+  public login(email, password){
+    return signInWithEmailAndPassword(this.auth, email, password);
+  }
+
+  public currentuser(){
+    return this.auth.currentUser ? this.auth.currentUser.uid : '';
+  }
 }
