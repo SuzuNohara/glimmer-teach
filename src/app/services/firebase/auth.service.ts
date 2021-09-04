@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
+  public uuid;
   private app = initializeApp(environment.firebase);
   private auth = getAuth(this.app);
 
@@ -31,7 +32,7 @@ export class AuthService {
     let auth = getAuth(app);
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const uid = user.uid;
+        this.uuid = user.uid;
         this.route.navigateByUrl('home');
       } else {
         this.route.navigateByUrl('');
@@ -48,6 +49,6 @@ export class AuthService {
   }
 
   public currentuser(){
-    return this.auth.currentUser ? this.auth.currentUser.uid : '';
+    return this.uuid;
   }
 }

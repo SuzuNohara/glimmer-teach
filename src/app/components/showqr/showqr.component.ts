@@ -17,7 +17,6 @@ export class ShowqrComponent implements OnInit {
   }
 
   public dismiss() {
-    console.log(this.content);
     this.modalController.dismiss({
       'dismissed': true
     });
