@@ -13,14 +13,18 @@ import { RegisterComponent } from './register/register.component';
 import { ClassroomComponent } from './components/classroom/classroom.component';
 import { CreateclassComponent } from './components/createclass/createclass.component';
 
+import { QRCodeModule } from 'angularx-qrcode';
+import { ShowqrComponent } from './components/showqr/showqr.component';
+
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, ClassroomComponent, CreateclassComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, ClassroomComponent, CreateclassComponent, ShowqrComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    QRCodeModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

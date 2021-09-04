@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
-import { getFirestore, collection, getDocs, setDoc, addDoc, doc} from 'firebase/firestore/lite';
+import { getFirestore, collection, documentId, getDocs, setDoc, addDoc, doc} from 'firebase/firestore/lite';
 import { Usuario } from 'src/app/model/usuario';
-import { AuthService } from './auth.service';
-import { BackendService } from '../backend.service';
+import { Horario } from 'src/app/model/horario';
+import { Salon } from 'src/app/model/salon';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +29,18 @@ export class DataService {
     const some = await setDoc(doc(this.db, 'usuario/' + user.uuid), user);
   }
 
-  public getUserInfo(currentUser){
-    const dataCol = collection(this.db, 'usuario/' + currentUser);
+  public async saveClass(data: Salon){
+    return setDoc(doc(this.db, 'usuario/' + data.usuario + '/salones/' + data.id), data);
+    // const some = await setDoc(doc(this.db, 'usuario/' + data.usuario + '/salones/' + data.usuario), data);
+  }
+
+  public getColection(colection: string){
+    const dataCol = collection(this.db, colection);
     return getDocs(dataCol);
   }
+
+  // public getDocument(doc: string){
+  //   const d = documentI(this.db, doc);
+  // }
 
 }

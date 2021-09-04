@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Salon } from '../model/salon';
 import { BackendService } from '../services/backend.service';
+import { ModalController } from '@ionic/angular';
+import { ShowqrComponent } from '../components/showqr/showqr.component';
 
 @Component({
   selector: 'app-home',
@@ -9,11 +12,12 @@ import { BackendService } from '../services/backend.service';
 })
 export class HomeComponent implements OnInit {
 
+  public salones: Salon[];
   public loading: boolean;
   public nombre: string;
-  public salones: any;
+  public uuid: string;
 
-  constructor(private route: Router, private backend: BackendService) {
+  constructor(private route: Router, private backend: BackendService, private modalController: ModalController) {
     this.loading = true;
   }
 
@@ -21,7 +25,9 @@ export class HomeComponent implements OnInit {
     this.backend.authState();
     setTimeout(() => {
       this.backend.getUserInfo().then((data) => {
-        console.log(data);
+        this.nombre = data.nombre;
+        this.uuid = data.uuid;
+        this.getClass();
         this.loading = false;
       }).catch((error) => {
         console.log(error);
@@ -40,5 +46,27 @@ export class HomeComponent implements OnInit {
 
   public logout(){
     this.backend.logout();
+  }
+
+  private getClass(){
+    this.backend.getClasses().then((data) => {
+      this.salones = data;
+    })
+  }
+
+  async presentModal(clase, content) {
+    console.log({
+      'content': content,
+      'salon': clase
+    })
+    const modal = await this.modalController.create({
+      component: ShowqrComponent,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'content': content,
+        'clase': clase
+      }
+    });
+    return await modal.present();
   }
 }

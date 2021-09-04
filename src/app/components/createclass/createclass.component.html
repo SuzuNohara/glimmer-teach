@@ -1,3 +1,68 @@
-<p>
-  createclass works!
-</p>
+<ion-content>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)='back()'><ion-icon name="arrow-back"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title><ion-input [(ngModel)]='nombre' placeholder='Nombre de la clase'></ion-input></ion-title>
+  </ion-toolbar>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>
+        Horario de clases
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          <ion-button *ngIf="!hor.lun" (click)='hor.lun = !hor.lun' class='day-button' color='primary' fill="outline">L</ion-button>
+          <ion-button *ngIf="hor.lun" (click)='hor.lun = !hor.lun' class='day-button' color='primary' fill="solid">L</ion-button>
+          <ion-datetime *ngIf="hor.lun" [(ngModel)]='hor.h1' class='date' displayFormat="HH"></ion-datetime>
+        </ion-col>
+        <ion-col>
+          <ion-button *ngIf="!hor.mar" (click)='hor.mar = !hor.mar' class='day-button' color='primary' fill="outline">M</ion-button>
+          <ion-button *ngIf="hor.mar" (click)='hor.mar = !hor.mar' class='day-button' color='primary' fill="solid">M</ion-button>
+          <ion-datetime *ngIf="hor.mar" [(ngModel)]='hor.h2' class='date' displayFormat="HH"></ion-datetime>
+        </ion-col>
+        <ion-col>
+          <ion-button *ngIf="!hor.mie" (click)='hor.mie = !hor.mie' class='day-button' color='primary' fill="outline">M</ion-button>
+          <ion-button *ngIf="hor.mie" (click)='hor.mie = !hor.mie' class='day-button' color='primary' fill="solid">M</ion-button>
+          <ion-datetime *ngIf="hor.mie" [(ngModel)]='hor.h3' class='date' displayFormat="HH"></ion-datetime>
+        </ion-col>
+        <ion-col>
+          <ion-button *ngIf="!hor.jue" (click)='hor.jue = !hor.jue' class='day-button' color='primary' fill="outline">J</ion-button>
+          <ion-button *ngIf="hor.jue" (click)='hor.jue = !hor.jue' class='day-button' color='primary' fill="solid">J</ion-button>
+          <ion-datetime *ngIf="hor.jue" [(ngModel)]='hor.h4' class='date' displayFormat="HH"></ion-datetime>
+        </ion-col>
+        <ion-col>
+          <ion-button *ngIf="!hor.vie" (click)='hor.vie = !hor.vie' class='day-button' color='primary' fill="outline">V</ion-button>
+          <ion-button *ngIf="hor.vie" (click)='hor.vie = !hor.vie' class='day-button' color='primary' fill="solid">V</ion-button>
+          <ion-datetime *ngIf="hor.vie" [(ngModel)]='hor.h5' class='date' displayFormat="HH"></ion-datetime>
+        </ion-col>
+        <ion-col>
+          <ion-button *ngIf="!hor.sab" (click)='hor.sab = !hor.sab' class='day-button' color='primary' fill="outline">S</ion-button>
+          <ion-button *ngIf="hor.sab" (click)='hor.sab = !hor.sab' class='day-button' color='primary' fill="solid">S</ion-button>
+          <ion-datetime *ngIf="hor.sab" [(ngModel)]='hor.h6' class='date' displayFormat="HH"></ion-datetime>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>
+        URL de reunion
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-textarea class='url' [(ngModel)]='url' clearOnEdit="true"></ion-textarea>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content class='save'>
+      <ion-button (click)='guardar()'>Guardar &nbsp;&nbsp;<ion-icon name="save"></ion-icon></ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

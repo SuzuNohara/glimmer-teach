@@ -1,0 +1,16 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)='dismiss()' slot='icon-only'><ion-icon name="close"></ion-icon></ion-button>
+      </ion-buttons>
+      <ion-title>{{ clase }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-card>
+    <ion-card-content class='qr-cont'>
+      <qrcode [qrdata]="content" [width]="256" class='qr' [errorCorrectionLevel]="'M'"></qrcode>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
