@@ -31,7 +31,6 @@ export class CreateclassComponent implements OnInit {
       this.alert.simpleAlert('Error', 'Elige un nombre mas largo para tu salon de clases');
     }else{
       this.backend.saveClass(this.nombre, this.url, this.hor).then((data) => {
-        console.log(data);
         this.alert.simpleAlert(this.nombre, 'Tu grupo ha sido creado exitosamente, comienza a gestionar tus actividades y periodos');
         this.dismiss();
       }).catch((error) => {

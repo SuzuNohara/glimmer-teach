@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertService } from '../services/alert.service';
 import { BackendService } from '../services/backend.service';
-import { AuthService } from '../services/firebase/auth.service';
 
 @Component({
   selector: 'app-register',

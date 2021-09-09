@@ -59,7 +59,7 @@ export class BackendService {
     this.auth.logout();
   }
 
-  public saveClass(name: string, url: string, horario: Horario){
+  public async saveClass(name: string, url: string, horario: Horario){
     let data: Salon = {
       usuario: this.currentuser(),
       nombre: name,
@@ -67,7 +67,13 @@ export class BackendService {
       url: url,
       id: uuidv4()
     }
-    return this.data.saveClass(data);
+    return new Promise((resolve) => {
+      let retorno = {};
+      this.data.saveClass1(data).then((fin) => {
+        this.data.saveClass(data);
+        resolve(retorno);
+      });
+    });
   }
 
   public async getClasses(): Promise<Salon[]>{
@@ -77,7 +83,9 @@ export class BackendService {
         let retorno: Salon[] = [];
         let dats = data.docs.map(doc => doc.data());
         for(let dat of dats){
-          retorno.push(JSON.parse(JSON.stringify(dat)));
+          this.data.getDocument(dat.ref).then((doc) => {
+            retorno.push(JSON.parse(JSON.stringify(doc.data())));
+          });
         }
         resolve(retorno);
       });

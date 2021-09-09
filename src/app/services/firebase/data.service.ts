@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
-import { getFirestore, collection, documentId, getDocs, setDoc, addDoc, doc} from 'firebase/firestore/lite';
+import { getFirestore, collection, documentId, getDocs, setDoc, addDoc, doc, getDoc} from 'firebase/firestore/lite';
 import { Usuario } from 'src/app/model/usuario';
 import { Horario } from 'src/app/model/horario';
 import { Salon } from 'src/app/model/salon';
@@ -30,8 +30,13 @@ export class DataService {
   }
 
   public async saveClass(data: Salon){
-    return setDoc(doc(this.db, 'usuario/' + data.usuario + '/salones/' + data.id), data);
-    // const some = await setDoc(doc(this.db, 'usuario/' + data.usuario + '/salones/' + data.usuario), data);
+    return setDoc(doc(this.db, 'usuario/' + data.usuario + '/salones/' + data.id), {
+      ref: doc(this.db, 'salon/' + data.id)
+    });
+  }
+
+  public async saveClass1(data: Salon){
+    return setDoc(doc(this.db, 'salon/' + data.id), data);
   }
 
   public getColection(colection: string){
@@ -39,8 +44,8 @@ export class DataService {
     return getDocs(dataCol);
   }
 
-  // public getDocument(doc: string){
-  //   const d = documentI(this.db, doc);
-  // }
+  public getDocument(document){
+    return getDoc(document);
+  }
 
 }

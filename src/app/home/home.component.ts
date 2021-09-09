@@ -18,7 +18,9 @@ export class HomeComponent implements OnInit {
   public nombre: string;
   public uuid: string;
 
-  constructor(private route: Router, private backend: BackendService, private modalController: ModalController) {
+  constructor(private route: Router, 
+    private backend: BackendService, 
+    private modalController: ModalController) {
     this.loading = true;
   }
 
