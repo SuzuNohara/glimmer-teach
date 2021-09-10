@@ -10,7 +10,7 @@
   <ion-progress-bar *ngIf='loading' type="indeterminate"></ion-progress-bar>
 
   <!-- <ion-list> -->
-  <ion-card *ngFor='let sal of salones'>
+  <ion-card *ngFor='let sal of salones; let i = index'>
     <ion-card-header>
       <!-- <ion-card-subtitle>
         
@@ -22,9 +22,13 @@
   
     <ion-card-content>
       <ion-row>
-        <ion-col><ion-button size='small'><ion-icon name="link"></ion-icon></ion-button></ion-col>
-        <ion-col><ion-button size='small'><ion-icon name="calendar"></ion-icon></ion-button></ion-col>
+        <!-- <ion-col><ion-button size='small'><ion-icon name="link"></ion-icon></ion-button></ion-col>
+        <ion-col><ion-button size='small'><ion-icon name="calendar"></ion-icon></ion-button></ion-col> -->
         <ion-col><ion-button size='small' (click)='presentModal(sal.nombre, sal.id)'><ion-icon name="qr-code"></ion-icon></ion-button></ion-col>
+        <ion-col><ion-button size='small' (click)='solicitudes(sal.nombre, sal.id, i)'>
+          <ion-icon name="person-add"></ion-icon>&nbsp;&nbsp;<ion-badge color="danger">{{ sal.solicitudes.length }}</ion-badge></ion-button>
+        </ion-col>
+        <ion-col></ion-col>
         <ion-col></ion-col>
         <ion-col></ion-col>
         <ion-col></ion-col>

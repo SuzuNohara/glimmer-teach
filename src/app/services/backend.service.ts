@@ -84,12 +84,24 @@ export class BackendService {
         let dats = data.docs.map(doc => doc.data());
         for(let dat of dats){
           this.data.getDocument(dat.ref).then((doc) => {
-            retorno.push(JSON.parse(JSON.stringify(doc.data())));
+            let objeto = doc.data();
+            objeto['solicitudes'] = [];
+            this.data.getColection('salon/' + dat.ref._key.path.segments[6] + '/solicitud').then(data1 => {
+              let data1s = data1.docs.map(doc => doc.data());
+              for(let dat1 of data1s){
+                objeto['solicitudes'].push(dat1);
+              }
+              retorno.push(JSON.parse(JSON.stringify(objeto)));
+              resolve(retorno);
+            });
           });
         }
-        resolve(retorno);
       });
     });
+  }
+
+  public getDoc(ref: any){
+    return this.data.getDocument(ref);
   }
 
 }

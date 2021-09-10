@@ -15,9 +15,10 @@ import { CreateclassComponent } from './components/createclass/createclass.compo
 
 import { QRCodeModule } from 'angularx-qrcode';
 import { ShowqrComponent } from './components/showqr/showqr.component';
+import { SolicitudesComponent } from './components/solicitudes/solicitudes.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, ClassroomComponent, CreateclassComponent, ShowqrComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, ClassroomComponent, CreateclassComponent, ShowqrComponent, SolicitudesComponent],
   entryComponents: [],
   imports: [
     BrowserModule,

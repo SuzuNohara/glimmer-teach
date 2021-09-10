@@ -5,6 +5,7 @@ import { BackendService } from '../services/backend.service';
 import { ModalController } from '@ionic/angular';
 import { ShowqrComponent } from '../components/showqr/showqr.component';
 import { CreateclassComponent } from '../components/createclass/createclass.component';
+import { SolicitudesComponent } from '../components/solicitudes/solicitudes.component';
 
 @Component({
   selector: 'app-home',
@@ -53,7 +54,7 @@ export class HomeComponent implements OnInit {
   private getClass(){
     this.backend.getClasses().then((data) => {
       this.salones = data;
-    })
+    });
   }
 
   async presentModal(clase, content) {
@@ -74,6 +75,22 @@ export class HomeComponent implements OnInit {
       cssClass: 'my-custom-class',
       componentProps: {
         'uuid': this.uuid
+      }
+    });
+    modal.onWillDismiss().then(data => {
+      this.getClass();
+    });
+    return await modal.present();
+  }
+
+  async solicitudes(nombre: string, id: string, num: number){
+    const modal = await this.modalController.create({
+      component: SolicitudesComponent,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'salon': id,
+        'nombre': nombre,
+        'solicitudes': this.salones[num]['solicitudes']
       }
     });
     modal.onWillDismiss().then(data => {
